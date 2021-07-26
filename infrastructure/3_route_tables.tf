@@ -3,7 +3,9 @@ resource "aws_route_table" "public-route-table" {
   vpc_id = aws_vpc.production_vpc_juan.id
 
   tags = {
-    Name = "Public-Route-Table"
+    Name = "Public-Route-Table",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 }
 
@@ -12,7 +14,9 @@ resource "aws_route_table" "private-route-table" {
   vpc_id = aws_vpc.production_vpc_juan.id
 
   tags = {
-    Name = "Private-Route-Table"
+    Name = "Private-Route-Table",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 }
 

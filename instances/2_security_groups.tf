@@ -5,17 +5,18 @@ resource "aws_security_group" "ec2_public_security_group" {
   vpc_id = data.terraform_remote_state.network_configuration.outputs.vpc_id
 
   ingress {
-    from_port = 3030
+    from_port = var.frontend_default_port
     protocol = "TCP"
-    to_port = 3030
+    to_port = var.frontend_default_port
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # SSH
   ingress {
     from_port = 22
     protocol = "TCP"
     to_port = 22
-    cidr_blocks = ["200.29.100.15/32"]
+    cidr_blocks = [var.ssh_allow_host]
   }
 
   egress {
@@ -23,6 +24,12 @@ resource "aws_security_group" "ec2_public_security_group" {
     protocol = "-1" # open all out rule
     to_port = 0
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "EC2-PUBLIC_SG",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 }
 
@@ -34,9 +41,9 @@ resource "aws_security_group" "ec2_private_security_group" {
 
   # allow access from public SG
   ingress {
-    from_port = 3000 # port exposed by backend
+    from_port = var.backend_default_port # port exposed by backend
     protocol = "TCP"
-    to_port = 3000
+    to_port = var.backend_default_port
     security_groups = [aws_security_group.ec2_public_security_group.id]
   }
 
@@ -55,6 +62,12 @@ resource "aws_security_group" "ec2_private_security_group" {
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
+  }
+
+  tags = {
+    Name = "EC2-Private-SG",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 
 
@@ -80,6 +93,13 @@ resource "aws_security_group" "elb_security_group" {
     to_port = 0
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = {
+    Name = "ELB-SG",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
+  }
+
 }
 
 
@@ -90,24 +110,30 @@ resource "aws_security_group" "database_security_group" {
   vpc_id = data.terraform_remote_state.network_configuration.outputs.vpc_id
 
   ingress {
-    from_port = 3306
+    from_port = var.database_default_port
     protocol = "TCP"
-    to_port = 3306
+    to_port = var.database_default_port
     security_groups = [aws_security_group.ec2_private_security_group.id]
   }
 
   egress {
-    from_port = 3306
+    from_port = var.database_default_port
     protocol = "TCP"
-    to_port = 3306
+    to_port = var.database_default_port
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    from_port = 3306
+    from_port = var.database_default_port
     protocol = "TCP"
-    to_port = 3306
+    to_port = var.database_default_port
     security_groups = [aws_security_group.bastion_SG.id] # abrir enlace para mysql desde el bastion
+  }
+
+  tags = {
+    Name = "DB-SG",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 
 }

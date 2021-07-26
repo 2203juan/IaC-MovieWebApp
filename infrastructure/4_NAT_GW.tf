@@ -1,10 +1,12 @@
 # Elastic Ip creation for nat gateway
 resource "aws_eip" "elastic-ip-for-nat-gw" {
   vpc = true
-  associate_with_private_ip = "10.0.0.5"
+  associate_with_private_ip = var.elastic_ip
 
   tags = {
-    Name = "Production-EIP"
+    Name = "Production-EIP",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 }
 
@@ -15,7 +17,9 @@ resource "aws_nat_gateway" "nat-gw" {
   subnet_id     = aws_subnet.public_subnet_1.id
 
   tags = {
-    Name = "Production-NAT-GW"
+    Name = "Production-NAT-GW",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 
   depends_on = [aws_eip.elastic-ip-for-nat-gw]

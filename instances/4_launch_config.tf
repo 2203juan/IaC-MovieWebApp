@@ -17,6 +17,11 @@ resource "aws_iam_role" "ec2_iam_role" {
 }
 EOF
 
+  tags = {
+    Name = "IAM ROLE FOR EC2 INSTANCES",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
+  }
 }
 
 # Creating policies to the iam role
@@ -46,6 +51,12 @@ EOF
 resource "aws_iam_instance_profile" "ec2_instance_profile" {
   name = "EC2-IAM.Instance-Profile2"
   role = aws_iam_role.ec2_iam_role.name
+
+  tags = {
+    Name = "EC2-INSTANCE-PROFILE",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
+  }
 }
 
 
@@ -64,6 +75,12 @@ data "aws_ami" "launch_configuration_ami" {
   }
 
   owners = ["099720109477"] # Canonical
+
+  tags = {
+    Name = "AWS-AMI",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
+  }
 }
 
 data "template_file" "user_data_back" {
@@ -83,11 +100,11 @@ resource "aws_launch_configuration" "ec2_private_launch_configuration" {
   image_id = data.aws_ami.launch_configuration_ami.id
   instance_type = var.ec2_instance_type
   key_name = var.key_pair_name
-  associate_public_ip_address = false
+  associate_public_ip_address = var.ec2_private_ec2_public_ip
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.name
   security_groups = [aws_security_group.ec2_private_security_group.id]
 
-  user_data =data.template_file.user_data_back.rendered
+  user_data =  data.template_file.user_data_back.rendered
 
   depends_on = [aws_db_instance.dbmovie]
 }
@@ -97,10 +114,11 @@ resource "aws_launch_configuration" "ec2_public_launch_configuration" {
   image_id = data.aws_ami.launch_configuration_ami.id
   instance_type = var.ec2_instance_type
   key_name = var.key_pair_name
-  associate_public_ip_address = true
+  associate_public_ip_address = var.ec2_public_ec2_public_ip
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.name
   security_groups = [aws_security_group.ec2_public_security_group.id]
 
 
   user_data = data.template_file.user_data_front.rendered
+
 }

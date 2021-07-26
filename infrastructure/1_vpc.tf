@@ -14,9 +14,11 @@ terraform {
 # VPC settings
 resource "aws_vpc" "production_vpc_juan" {
   cidr_block           = var.vpc_cidr
-  enable_dns_hostnames = true
+  enable_dns_hostnames = var.enable_dns_hostnames
 
   tags = {
-    Name = "Production-VPC"
+    Name = "Production-VPC",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 }

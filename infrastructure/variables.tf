@@ -48,3 +48,15 @@ variable "private_subnet_3_cidr" {
 # --------------------------------------
 
 
+# other externalization variables
+variable "enable_dns_hostnames" {
+  description = "Enable Dns Hostnames (True or False)"
+  default = true
+}
+
+#NAT Elastic IP
+
+variable "elastic_ip" {
+  description = "NAT GATEWAY ELASTIC IP"
+  default = "10.0.0.5"
+}

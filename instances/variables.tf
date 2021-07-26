@@ -36,3 +36,48 @@ variable "db_user_name" {
 variable "db_password" {
   description = "Database Password"
 }
+
+variable "backend_default_port" {
+  description = "BackEnd Default Port"
+  default = 3000
+}
+
+variable "frontend_default_port" {
+  description = "FrontEnd Default Port"
+  default = 3030
+}
+
+variable "ssh_allow_host" {
+  description = "SSH ALLOW HOST IP -> use: ip_adress/32"
+  default = "200.29.100.15/32"
+}
+
+variable "database_default_port" {
+  description = "Database Default Port"
+  default = "3306"
+}
+
+variable "front_load_balancer_port" {
+  description = "Frontend load balancer port"
+  default = 80
+}
+
+variable "back_load_balancer_port" {
+  description = "Backend load balancer port"
+  default = 3000
+}
+
+variable "ec2_private_ec2_public_ip" {
+  description = "Public Ec2 Ip Adress for private instances? (true or false)"
+  default = false
+}
+
+variable "ec2_public_ec2_public_ip" {
+  description = "Public Ec2 Ip Adress for public instances? (true or false)"
+  default = true
+}
+
+variable "propagate_autoscaling_tags" {
+  description = "Propagate autoscaling tags? (true or false)"
+  default = false
+}

@@ -9,9 +9,9 @@ resource "aws_elb" "webapp_load_balancer" {
 
 
   listener {
-    instance_port = 3030
+    instance_port = var.frontend_default_port
     instance_protocol = "HTTP"
-    lb_port = 80
+    lb_port = var.front_load_balancer_port
     lb_protocol = "HTTP"
   }
 
@@ -21,6 +21,12 @@ resource "aws_elb" "webapp_load_balancer" {
     target = "HTTP:3030/"
     timeout = 10
     unhealthy_threshold = 5
+  }
+
+  tags = {
+    Name = "Frontend Load Balancer",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 }
 
@@ -34,9 +40,9 @@ resource "aws_elb" "backend_load_balancer" {
     data.terraform_remote_state.network_configuration.outputs.private_subnet_3_id ]
 
   listener {
-    instance_port = 3000
+    instance_port = var.backend_default_port
     instance_protocol = "HTTP"
-    lb_port = 3000
+    lb_port = var.back_load_balancer_port
     lb_protocol = "HTTP"
   }
 
@@ -46,5 +52,11 @@ resource "aws_elb" "backend_load_balancer" {
     target = "HTTP:3000/"
     timeout = 10
     unhealthy_threshold = 5
+  }
+
+  tags = {
+    Name = "Backend Load Balancer",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 }

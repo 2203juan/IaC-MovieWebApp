@@ -7,7 +7,9 @@ resource "aws_subnet" "public_subnet_1" {
   availability_zone = "ca-central-1a"
 
   tags = {
-    Name = "Public-Subnet-1"
+    Name = "Public-Subnet-1",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 }
 
@@ -18,7 +20,9 @@ resource "aws_subnet" "public_subnet_2" {
   availability_zone = "ca-central-1b"
 
   tags = {
-    Name = "Public-Subnet-2"
+    Name = "Public-Subnet-2",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 }
 
@@ -29,7 +33,9 @@ resource "aws_subnet" "public_subnet_3" {
   availability_zone = "ca-central-1d"
 
   tags = {
-    Name = "Public-Subnet-3"
+    Name = "Public-Subnet-3",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 }
 # --------------------------------------------------
@@ -43,7 +49,9 @@ resource "aws_subnet" "private_subnet_1" {
   availability_zone = "ca-central-1a"
 
   tags = {
-    Name  = "Private-Subnet-1"
+    Name  = "Private-Subnet-1",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 }
 
@@ -54,7 +62,9 @@ resource "aws_subnet" "private_subnet_2" {
   availability_zone = "ca-central-1b"
 
   tags = {
-    Name  = "Private-Subnet-2"
+    Name  = "Private-Subnet-2",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 }
 
@@ -65,7 +75,9 @@ resource "aws_subnet" "private_subnet_3" {
   availability_zone = "ca-central-1d"
 
   tags = {
-    Name  = "Private-Subnet-3"
+    Name  = "Private-Subnet-3",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 }
 

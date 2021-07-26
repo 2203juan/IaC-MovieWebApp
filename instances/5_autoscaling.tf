@@ -14,15 +14,28 @@ resource "aws_autoscaling_group" "ec2_private_autoscaling_group" {
 
   tag {
     key = "Name"
-    propagate_at_launch = false
+    propagate_at_launch = var.propagate_autoscaling_tags
     value = "Backend-EC2-Instance"
   }
 
   tag {
     key = "Type"
-    propagate_at_launch = false
+    propagate_at_launch = var.propagate_autoscaling_tags
     value = "Backend"
   }
+
+  tag {
+    key = "Purpose"
+    propagate_at_launch = var.propagate_autoscaling_tags
+    value = "RampUp"
+  }
+
+  tag {
+    key = "Student"
+    propagate_at_launch = var.propagate_autoscaling_tags
+    value = "Juan Jose Hoyos Urcue"
+  }
+
 }
 
 resource "aws_autoscaling_group" "ec2_public_autoscaling_group" {
@@ -42,14 +55,26 @@ resource "aws_autoscaling_group" "ec2_public_autoscaling_group" {
 
   tag {
     key = "Name"
-    propagate_at_launch = false
+    propagate_at_launch = var.propagate_autoscaling_tags
     value = "WebApp-EC2-Instance"
   }
 
   tag {
     key = "Type"
-    propagate_at_launch = false
+    propagate_at_launch = var.propagate_autoscaling_tags
     value = "WebApp"
+  }
+
+  tag {
+    key = "Purpose"
+    propagate_at_launch = var.propagate_autoscaling_tags
+    value = "RampUp"
+  }
+
+  tag {
+    key = "Student"
+    propagate_at_launch = var.propagate_autoscaling_tags
+    value = "Juan Jose Hoyos Urcue"
   }
 }
 
@@ -63,8 +88,9 @@ resource "aws_autoscaling_policy" "webapp_production_scaling_policy" {
     predefined_metric_specification {
       predefined_metric_type = "ASGAverageCPUUtilization"
     }
-    target_value = 80.0 # 80% cpu usage is the threshold to autoscaling up or down
+    target_value = 80.0 # 80% cpu usage is the threshold to autoscaling up or down -> must commonn metrics are cpu or memory
   }
+
 }
 
 

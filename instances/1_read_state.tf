@@ -1,11 +1,3 @@
-provider "aws" {
-  region = var.region
-}
-
-terraform {
-  backend "s3" {}
-}
-
 # Reading Remote State for layer 1 infrastructure
 data "terraform_remote_state" "network_configuration" {
   backend = "s3"

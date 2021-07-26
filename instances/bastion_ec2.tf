@@ -6,15 +6,21 @@ resource "aws_security_group" "bastion_SG" {
     from_port = 22
     protocol = "TCP"
     to_port = 22
-    cidr_blocks = ["200.29.100.15/32"]
+    cidr_blocks = [var.ssh_allow_host]
     # security_groups = [aws_security_group.ec2_public_security_group.id]
   }
 
   egress {
-    from_port = 3306
+    from_port = var.database_default_port
     protocol = "TCP"
-    to_port = 3306
+    to_port = var.database_default_port
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "BASTION SG",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 
 }

@@ -6,7 +6,9 @@ resource "aws_db_subnet_group" "db_subnet_group" {
     data.terraform_remote_state.network_configuration.outputs.private_subnet_3_id]
 
   tags = {
-    Name = "DB SUBNET GROUP"
+    Name = "DB SUBNET GROUP",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 }
 
@@ -24,6 +26,12 @@ resource "aws_db_instance" "dbmovie" {
   vpc_security_group_ids = [aws_security_group.database_security_group.id]
   publicly_accessible = false
   skip_final_snapshot = true
+
+  tags = {
+    Name = "MAIN DATABASE",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
+  }
 }
 
 resource "aws_db_instance" "dbmovie_replica" {
@@ -35,4 +43,10 @@ resource "aws_db_instance" "dbmovie_replica" {
   skip_final_snapshot = true
 
   vpc_security_group_ids = [aws_security_group.database_security_group.id]
+
+  tags = {
+    Name = "Database Replica",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
+  }
 }

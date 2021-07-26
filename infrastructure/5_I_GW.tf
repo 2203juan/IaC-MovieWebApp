@@ -4,7 +4,9 @@ resource "aws_internet_gateway" "production-igw" {
   vpc_id = aws_vpc.production_vpc_juan.id
 
   tags = {
-    Name = "Production-IGW"
+    Name = "Production-IGW",
+    Purpose = "RampUp",
+    Student = "Juan Jose Hoyos Urcue"
   }
 }
 
