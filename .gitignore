@@ -1,0 +1,5 @@
+/.idea/
+infrastructure/.terraform/
+/infrastructure/.terraform.lock.hcl
+/instances/.terraform
+/instances/.terraform.lock.hcl
