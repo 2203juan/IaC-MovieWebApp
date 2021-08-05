@@ -1,0 +1,2 @@
+[bastion]
+${dns_name}

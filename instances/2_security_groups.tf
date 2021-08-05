@@ -16,7 +16,7 @@ resource "aws_security_group" "ec2_public_security_group" {
     from_port = 22
     protocol = "TCP"
     to_port = 22
-    cidr_blocks = [var.ssh_allow_host]
+    cidr_blocks = [var.ssh_allow_host] # habilitar master-> jenkins
   }
 
   egress {
