@@ -9,6 +9,23 @@ variable "region" {
   description = "AWS Region"
 }
 
+variable "zone_1" {
+  description = "Avaliability Zone 1"
+  default = "ca-central-1a"
+  
+}
+
+variable "zone_2" {
+  description = "Avaliability Zone 2"
+  default = "ca-central-1b"
+}
+
+variable "zone_3" {
+  description = "Avaliability Zone 3"
+  default = "ca-central-1d"
+}
+
+
 # VPC_CIDR_BLOCK
 variable "vpc_cidr" {
   default     = "10.0.0.0/16"

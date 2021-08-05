@@ -4,7 +4,7 @@
 resource "aws_subnet" "public_subnet_1" {
   cidr_block        = var.public_subnet_1_cidr
   vpc_id            = aws_vpc.production_vpc_juan.id
-  availability_zone = "ca-central-1a"
+  availability_zone = var.zone_1
 
   tags = {
     Name = "Public-Subnet-1",
@@ -17,7 +17,7 @@ resource "aws_subnet" "public_subnet_1" {
 resource "aws_subnet" "public_subnet_2" {
   cidr_block        = var.public_subnet_2_cidr
   vpc_id            = aws_vpc.production_vpc_juan.id
-  availability_zone = "ca-central-1b"
+  availability_zone = var.zone_2
 
   tags = {
     Name = "Public-Subnet-2",
@@ -30,7 +30,7 @@ resource "aws_subnet" "public_subnet_2" {
 resource "aws_subnet" "public_subnet_3" {
   cidr_block        = var.public_subnet_3_cidr
   vpc_id            = aws_vpc.production_vpc_juan.id
-  availability_zone = "ca-central-1d"
+  availability_zone = var.zone_3
 
   tags = {
     Name = "Public-Subnet-3",
@@ -46,7 +46,7 @@ resource "aws_subnet" "public_subnet_3" {
 resource "aws_subnet" "private_subnet_1" {
   cidr_block        = var.private_subnet_1_cidr
   vpc_id            = aws_vpc.production_vpc_juan.id
-  availability_zone = "ca-central-1a"
+  availability_zone = var.zone_1
 
   tags = {
     Name  = "Private-Subnet-1",
@@ -59,7 +59,7 @@ resource "aws_subnet" "private_subnet_1" {
 resource "aws_subnet" "private_subnet_2" {
   cidr_block        = var.private_subnet_2_cidr
   vpc_id            = aws_vpc.production_vpc_juan.id
-  availability_zone = "ca-central-1b"
+  availability_zone = var.zone_2
 
   tags = {
     Name  = "Private-Subnet-2",
@@ -72,7 +72,7 @@ resource "aws_subnet" "private_subnet_2" {
 resource "aws_subnet" "private_subnet_3" {
   cidr_block        = var.private_subnet_3_cidr
   vpc_id            = aws_vpc.production_vpc_juan.id
-  availability_zone = "ca-central-1d"
+  availability_zone = var.zone_3
 
   tags = {
     Name  = "Private-Subnet-3",
