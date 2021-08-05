@@ -3,3 +3,4 @@ infrastructure/.terraform/
 /infrastructure/.terraform.lock.hcl
 /instances/.terraform
 /instances/.terraform.lock.hcl
+/ansible/playbooks/juan.hoyosu.pem

@@ -1,0 +1,28 @@
+---
+# tasks file for mysql
+- name: Add MySQL repository key
+  apt_key:
+    keyserver: pgp.mit.edu
+    id: 5072E1F5
+    state: present
+
+- name: Add official MySQL 5.7 ubuntu bionic repository
+  apt_repository:
+    repo: "deb http://repo.mysql.com/apt/ubuntu bionic mysql-5.7"
+    state: present
+
+- name: Install MySQL dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - mysql-common
+    - mysql-client
+
+- name: Copy .sql start script
+  copy:
+    src: /home/juanhoyosu/Documents/RampUp/movie/movie-analyst-api/data_model/table_creation_and_inserts.sql
+    dest: /tmp/script.sql
+
+- name: Run Start Script
+  shell: mysql -u movie_database -pmovie_database -h dbmovie.c3by6yvh7dj1.ca-central-1.rds.amazonaws.com < /tmp/script.sql

@@ -113,7 +113,7 @@ resource "aws_security_group" "database_security_group" {
     from_port = var.database_default_port
     protocol = "TCP"
     to_port = var.database_default_port
-    security_groups = [aws_security_group.ec2_private_security_group.id]
+    security_groups = [aws_security_group.ec2_private_security_group.id,aws_security_group.bastion_SG.id]
   }
 
   egress {

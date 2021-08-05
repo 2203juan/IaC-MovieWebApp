@@ -20,3 +20,7 @@ output "rds_replica_connection_params" {
   description = "RDS replica instance connection parameters"
   value       = "-h ${aws_db_instance.dbmovie_replica.address} -p ${aws_db_instance.dbmovie_replica.port} -U ${aws_db_instance.dbmovie_replica.username} mysql"
 }
+
+output "arn" {
+  value = aws_autoscaling_group.ec2_public_autoscaling_group.target_group_arns
+}

@@ -1,0 +1,6 @@
+-
+  name: Install Mysql client - Copy File
+  hosts: bastion
+  become: true
+  roles:
+    - role: mysql

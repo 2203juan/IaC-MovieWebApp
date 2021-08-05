@@ -1,5 +1,5 @@
 resource "aws_security_group" "bastion_SG" {
-  name = "SSH-SG"
+  name = "Bastion-SSH-SG"
   vpc_id = data.terraform_remote_state.network_configuration.outputs.vpc_id
 
   ingress {
@@ -17,6 +17,14 @@ resource "aws_security_group" "bastion_SG" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
   tags = {
     Name = "BASTION SG",
     Purpose = "RampUp",
@@ -25,7 +33,7 @@ resource "aws_security_group" "bastion_SG" {
 
 }
 
-# leventar instancia con ip publica manual, asociar SSH-SG
+# leventar instancia con ip publica manual, asociar Bastion-SSH-SG
 # asociar ip privada de la instancia a rds -> inbound rule
 # conectarse por ssh a la instancia y desde ahi conectarse a la base de datos
 
@@ -34,7 +42,7 @@ resource "aws_security_group" "bastion_SG" {
   tags = {
     Name = "primary_network_interface"
   }
-}
+}*/
 
 resource "aws_instance" "bastion" {
   ami = "ami-0e28822503eeedddc"
@@ -44,8 +52,9 @@ resource "aws_instance" "bastion" {
   instance_type = var.ec2_instance_type
   key_name = var.key_pair_name
   associate_public_ip_address = true
+  subnet_id = data.terraform_remote_state.network_configuration.outputs.public_subnet_1_id
 
   tags = {
     Name = "Bastion EC2"
   }
-}*/
+}

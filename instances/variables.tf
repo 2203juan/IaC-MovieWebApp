@@ -16,7 +16,7 @@ variable "ec2_instance_type" {
 }
 
 variable "key_pair_name" {
-  default = "myEc2KeyPair"
+  default = "juan.hoyosu"
   description = "Keypair to use to connect to EC2-Instances"
 }
 
