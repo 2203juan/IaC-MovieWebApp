@@ -1,2 +1,5 @@
 ---
 # vars file for mysql
+user: movie_database
+pass: movie_database
+host: dbmovie.c3by6yvh7dj1.ca-central-1.rds.amazonaws.com

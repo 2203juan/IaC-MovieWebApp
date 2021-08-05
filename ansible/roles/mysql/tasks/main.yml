@@ -25,4 +25,4 @@
     dest: /tmp/script.sql
 
 - name: Run Start Script
-  shell: mysql -u movie_database -pmovie_database -h dbmovie.c3by6yvh7dj1.ca-central-1.rds.amazonaws.com < /tmp/script.sql
+  shell: mysql -u {{user}}  -p{{pass}} -h {{host}} < /tmp/script.sql
