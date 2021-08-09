@@ -1,35 +1,13 @@
 #!/bin/bash
-# install nodejs
 sudo su
+sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+apt-cache policy docker-ce
+sudo apt install docker-ce -y
 
-cd ~
-curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
+docker run -p 3000:3000 -e MYSQL_HOST=${host_endpoint} \
+                    -e MYSQL_USER=${user_name} \
+                    -e MYSQL_PASS=${password} \
+                    juan2203/movie-api:latest
 
-bash nodesource_setup.sh
-
-apt install nodejs -y
-
-apt install build-essential -y
-
-# clone my repository
-
-git clone https://github.com/2203juan/movie-analyst-api.git
-
-# install project dependencies
-cd movie-analyst-api
-
-npm i nodemon
-
-npm i express
-
-npm i mysql
-
-# init application
-
-npm install -g pm2
-
-export MYSQL_HOST=${host_endpoint}
-export MYSQL_USER=${user_name}
-export MYSQL_PASS=${password}
-
-pm2 start server.js --name "backend-api"

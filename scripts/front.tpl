@@ -1,33 +1,9 @@
 #!/bin/bash
-# install nodejs
 sudo su
+sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+apt-cache policy docker-ce
+sudo apt install docker-ce -y
 
-cd ~
-curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
-
-bash nodesource_setup.sh
-
-apt install nodejs -y
-
-apt install build-essential -y
-
-# clone my repository
-
-git clone https://github.com/2203juan/movie-analyst-ui.git
-
-# install project dependencies
-cd movie-analyst-ui
-
-npm install ejs --ignore-scripts
-
-npm i express
-
-npm i mysql
-
-# config back host
-export BACK_HOST=${back_host}
-
-# init application
-npm install -g pm2
-
-pm2 start server.js --name "front"
+docker run -d -p 3030:3030 -e BACK_HOST=${back_host} juan2203/movie-ui:latest

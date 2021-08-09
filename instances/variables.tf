@@ -47,9 +47,14 @@ variable "frontend_default_port" {
   default = 3030
 }
 
-variable "ssh_allow_host" {
-  description = "SSH ALLOW HOST IP -> use: ip_adress/32"
+variable "ssh_allow_host_1" {
+  description = "SSH ALLOW HOST IP 1 -> use: ip_adress/32"
   default = "200.29.100.15/32"
+}
+
+variable "ssh_allow_host_2" {
+  description = "SSH ALLOW HOST IP 2 -> use: ip_adress/32"
+  default = "15.223.115.102/32"
 }
 
 variable "database_default_port" {

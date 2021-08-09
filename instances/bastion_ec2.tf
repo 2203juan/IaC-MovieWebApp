@@ -6,8 +6,14 @@ resource "aws_security_group" "bastion_SG" {
     from_port = 22
     protocol = "TCP"
     to_port = 22
-    cidr_blocks = [var.ssh_allow_host]
-    # security_groups = [aws_security_group.ec2_public_security_group.id]
+    cidr_blocks = [var.ssh_allow_host_1]
+  }
+
+  ingress {
+    from_port = 22
+    protocol = "TCP"
+    to_port = 22
+    cidr_blocks = [var.ssh_allow_host_2]
   }
 
   egress {

@@ -21,6 +21,28 @@ output "rds_replica_connection_params" {
   value       = "-h ${aws_db_instance.dbmovie_replica.address} -p ${aws_db_instance.dbmovie_replica.port} -U ${aws_db_instance.dbmovie_replica.username} mysql"
 }
 
-output "arn" {
-  value = aws_autoscaling_group.ec2_public_autoscaling_group.target_group_arns
+data "aws_instances" "public" {
+  filter {
+    name = "instance.group-id"
+    values = [aws_security_group.ec2_public_security_group.id]
+  }
+   instance_state_names = ["running"]
 }
+/*
+data "aws_instances" "private" {
+  filter {
+    name = "instance.group-id"
+    values = [aws_security_group.ec2_private_security_group.id]
+  }
+   instance_state_names = ["running"]
+}
+
+output "ec2_public_ips" {
+  description = "EC2 public ip's adress"
+  value = data.aws_instances.public.ids
+}
+
+output "ec2_private_ips" {
+  description = "EC2 pruvate ip's adress"
+  value = data.aws_instances.private.ids
+}*/

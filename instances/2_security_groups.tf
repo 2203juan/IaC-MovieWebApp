@@ -16,7 +16,14 @@ resource "aws_security_group" "ec2_public_security_group" {
     from_port = 22
     protocol = "TCP"
     to_port = 22
-    cidr_blocks = [var.ssh_allow_host] # habilitar master-> jenkins
+    cidr_blocks = [var.ssh_allow_host_1]
+  }
+
+  ingress {
+    from_port = 22
+    protocol = "TCP"
+    to_port = 22
+    cidr_blocks = [var.ssh_allow_host_2]
   }
 
   egress {
@@ -127,7 +134,7 @@ resource "aws_security_group" "database_security_group" {
     from_port = var.database_default_port
     protocol = "TCP"
     to_port = var.database_default_port
-    security_groups = [aws_security_group.bastion_SG.id] # abrir enlace para mysql desde el bastion
+    security_groups = [aws_security_group.bastion_SG.id] # open access for mysql from bastion instance
   }
 
   tags = {
