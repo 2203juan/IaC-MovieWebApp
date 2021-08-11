@@ -49,7 +49,7 @@ EOF
 
 # Creating instance profile
 resource "aws_iam_instance_profile" "ec2_instance_profile" {
-  name = "EC2-IAM.Instance-Profile2"
+  name = "EC2-IAM.Instance-Profile_rampup"
   role = aws_iam_role.ec2_iam_role.name
 
   tags = {

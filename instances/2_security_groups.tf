@@ -54,6 +54,19 @@ resource "aws_security_group" "ec2_private_security_group" {
     security_groups = [aws_security_group.ec2_public_security_group.id]
   }
 
+  ingress {
+    from_port = 22
+    protocol = "TCP"
+    to_port = 22
+    security_groups = [aws_security_group.bastion_SG.id]
+  }
+
+  ingress {
+    from_port = 22
+    protocol = "TCP"
+    to_port = 22
+    cidr_blocks = [var.ssh_allow_host_2] #allow ssh for jenkins
+  }
   # allow health checking for instances using this SG
   ingress {
     from_port = 0

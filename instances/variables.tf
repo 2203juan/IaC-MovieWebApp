@@ -54,7 +54,7 @@ variable "ssh_allow_host_1" {
 
 variable "ssh_allow_host_2" {
   description = "SSH ALLOW HOST IP 2 -> use: ip_adress/32"
-  default = "15.223.115.102/32"
+  default = "3.96.189.233/32"
 }
 
 variable "database_default_port" {
